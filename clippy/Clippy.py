@@ -12,12 +12,12 @@ class Clippy:
 
         return_code, stdout = self.open_main_rofi_window()
 
+        if return_code != 0:
+            sys.exit()
+
         actual_entry = self.fetch_actual_entry(stdout[:-1])
 
-        if return_code == 1:
-            sys.exit()
-        else:
-            self.save_to_clipboard(actual_entry)
+        self.save_to_clipboard(actual_entry)
 
     def open_main_rofi_window(self) -> Tuple[int, str]:
         rofi = run(
